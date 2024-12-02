@@ -1,0 +1,62 @@
+<div class="container">
+    <h2>Gestión de Vehículos</h2>
+  
+    <!-- Botón para agregar un nuevo vehículo -->
+    <button class="btn btn-primary" (click)="nuevoVehiculo()">Agregar Vehículo</button>
+    
+      <!-- Formulario para agregar/editar vehículo -->
+    <div *ngIf="selectedVehiculo" class="card mt-3">
+      <div class="card-body">
+        <h5>{{ selectedVehiculo.id ? 'Editar Vehículo' : 'Nuevo Vehículo' }}</h5>
+        <form (ngSubmit)="guardarVehiculo()">
+          <div class="form-group">
+            <label>VIN:</label>
+            <input type="text" class="form-control" [(ngModel)]="selectedVehiculo.vin" name="vin" required />
+          </div>
+          <div class="form-group">
+            <label>Placa:</label>
+            <input type="text" class="form-control" [(ngModel)]="selectedVehiculo.placa" name="placa" required />
+          </div>
+          <div class="form-group">
+            <label>Modelo:</label>
+            <input type="text" class="form-control" [(ngModel)]="selectedVehiculo.modelo" name="modelo" required />
+          </div>
+          <div class="form-group">
+            <label>Estatus:</label>
+            <input type="text" class="form-control" [(ngModel)]="selectedVehiculo.estatus" name="estatus" required />
+          </div>
+          <button type="submit" class="btn btn-success mt-3">Guardar</button>
+          <button type="button" class="btn btn-secondary mt-3" (click)="selectedVehiculo = null">Cancelar</button>
+        </form>
+      </div>
+    </div>
+    <!-- Tabla de vehículos -->
+    <table class="table table-bordered mt-3">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>VIN</th>
+          <th>Placa</th>
+          <th>Modelo</th>
+          <th>Estatus</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vehiculo of vehiculos">
+          <td>{{ vehiculo.id }}</td>
+          <td>{{ vehiculo.vin }}</td>
+          <td>{{ vehiculo.placa }}</td>
+          <td>{{ vehiculo.modelo }}</td>
+          <td>{{ vehiculo.estatus }}</td>
+          <td>
+            <button class="btn btn-warning btn-sm" (click)="seleccionarVehiculo(vehiculo)">Editar</button>
+            <button class="btn btn-danger btn-sm" (click)="eliminarVehiculo(vehiculo.id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+
+  </div>
+  
